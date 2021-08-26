@@ -1,8 +1,10 @@
 import cc.arduino.*;
 import org.firmata.*;
+Arduino arduino;
 
 void setup(){
   size(400, 400);
+  background(165,201 ,253);
 }
 
 void draw(){
@@ -19,5 +21,5 @@ void draw(){
   ellipse(95, 175, 15, 15);//inner eye
   noFill();
   stroke(0, 0, 0);
-  bezier(120, 140,  150, 175,  150, 200,  120, 260);
+  bezier(120, 140,  150, 175,  150, 200,  120, 260); //gill line
 }
