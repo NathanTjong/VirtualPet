@@ -1,13 +1,17 @@
+import processing.serial.*;
 import cc.arduino.*;
-import org.firmata.*;
 Arduino arduino;
+
 
 void setup(){
   size(400, 400);
   background(165,201 ,253);
+  arduino = new Arduino(this, Arduino.list()[0], 57600); //change the [0] to a [1] or [2] etc. if your program doesn't work
 }
 
 void draw(){
+  int y=arduino.analogRead(5);
+  System.out.println(y);
   noStroke();
   fill(212,175,55); //gold coloring for main body
   ellipse(150, 200, 175, 125); //main body
@@ -21,5 +25,17 @@ void draw(){
   ellipse(95, 175, 15, 15);//inner eye
   noFill();
   stroke(0, 0, 0);
-  bezier(120, 140,  150, 175,  150, 200,  120, 260); //gill line
+  bezier(120, 140,  150, 175,  150, 200,  120, 260);
+  fill(212,175,55);
+  noStroke();
+   if (y<25){
+    ellipse(100, 180, 30, 30);//sleep
+  }
+  else if (y<75){
+    arc(100, 180, 30, 30, PI, 2*PI, CHORD);
+  }
+  else if (y>400){
+    arc(100, 180, 30, 30, 7*PI/6, 11*PI/6, CHORD);
+    arc(100, 180, 30, 30, 0, PI, CHORD);
+  }
 }
